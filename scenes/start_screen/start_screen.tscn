@@ -1,0 +1,95 @@
+[gd_scene load_steps=8 format=3 uid="uid://bod60lceunai5"]
+
+[ext_resource type="Texture2D" uid="uid://25qmydaxy35y" path="res://resources/sprites/main_menu.jpg" id="1_076i8"]
+[ext_resource type="Script" path="res://scenes/start_screen/start_screen.gd" id="1_t1uvc"]
+[ext_resource type="FontFile" uid="uid://b6oytbii1s7h" path="res://resources/fonts/mago3.ttf" id="2_i0epl"]
+[ext_resource type="AudioStream" uid="uid://c8nkjvt3yfxuf" path="res://resources/audio/music/main_theme.wav" id="3_rifvs"]
+
+[sub_resource type="Animation" id="Animation_w8ct6"]
+resource_name = "text_blink"
+length = 2.0
+loop_mode = 1
+step = 0.5
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Label:visible")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0.0333333, 1, 2),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 1,
+"values": [true, false, true]
+}
+
+[sub_resource type="Animation" id="Animation_ljl1p"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Label:visible")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_0utbm"]
+_data = {
+"RESET": SubResource("Animation_ljl1p"),
+"text_blink": SubResource("Animation_w8ct6")
+}
+
+[node name="StartScreen" type="CanvasLayer"]
+script = ExtResource("1_t1uvc")
+
+[node name="Control" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="BackgroundImage" type="TextureRect" parent="Control"]
+unique_name_in_owner = true
+layout_mode = 0
+offset_right = 1280.0
+offset_bottom = 720.0
+texture = ExtResource("1_076i8")
+
+[node name="Label" type="Label" parent="Control"]
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -320.0
+offset_top = -126.0
+offset_right = 320.0
+offset_bottom = -75.0
+grow_horizontal = 2
+grow_vertical = 0
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = ExtResource("2_i0epl")
+theme_override_font_sizes/font_size = 64
+text = "PRESS ANY BUTTON TO PLAY!"
+horizontal_alignment = 1
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="Control"]
+libraries = {
+"": SubResource("AnimationLibrary_0utbm")
+}
+autoplay = "text_blink"
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("3_rifvs")
+volume_db = -15.0
+autoplay = true
+
+[connection signal="gui_input" from="Control" to="Control" method="_on_gui_input"]
