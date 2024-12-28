@@ -17,6 +17,12 @@ config/features=PackedStringArray("4.3", "Forward Plus")
 [autoload]
 
 Events="*res://scenes/events.gd"
+Globals="*res://scenes/globals.gd"
+SaveManager="*res://scenes/save_manager.gd"
+
+[debug]
+
+gdscript/warnings/unused_signal=0
 
 [display]
 

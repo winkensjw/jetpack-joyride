@@ -1,0 +1,123 @@
+[gd_scene load_steps=8 format=3 uid="uid://dc3rmgc8kijcx"]
+
+[ext_resource type="FontFile" uid="uid://b6oytbii1s7h" path="res://resources/fonts/mago3.ttf" id="1_1yqph"]
+[ext_resource type="Script" path="res://scenes/main_menu/settings_dialog/settings_dialog.gd" id="1_8n6tt"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_8qxam"]
+bg_color = Color(0.435294, 0.52549, 0.643137, 1)
+border_width_left = 5
+border_width_top = 5
+border_width_right = 5
+border_width_bottom = 5
+border_color = Color(0.215686, 0.309804, 0.4, 1)
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_ur73o"]
+content_margin_right = 7.0
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_n1pol"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_bahiu"]
+content_margin_left = 10.0
+content_margin_right = 10.0
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_rkhq4"]
+content_margin_bottom = 5.0
+
+[node name="SettingsDialog" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_8n6tt")
+
+[node name="DarkPane" type="PanelContainer" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="SettingsWindow" type="PanelContainer" parent="DarkPane"]
+custom_minimum_size = Vector2(200, 150)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+theme_override_styles/panel = SubResource("StyleBoxFlat_8qxam")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="DarkPane/SettingsWindow"]
+layout_mode = 2
+
+[node name="Header" type="PanelContainer" parent="DarkPane/SettingsWindow/VBoxContainer"]
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxEmpty_ur73o")
+
+[node name="SettingsLabel" type="Label" parent="DarkPane/SettingsWindow/VBoxContainer/Header"]
+layout_mode = 2
+size_flags_horizontal = 6
+theme_override_fonts/font = ExtResource("1_1yqph")
+theme_override_font_sizes/font_size = 32
+text = "SETTINGS"
+
+[node name="CloseButton" type="Button" parent="DarkPane/SettingsWindow/VBoxContainer/Header"]
+layout_mode = 2
+size_flags_horizontal = 8
+theme_override_fonts/font = ExtResource("1_1yqph")
+theme_override_font_sizes/font_size = 32
+text = "X"
+flat = true
+
+[node name="SettingsContainer" type="PanelContainer" parent="DarkPane/SettingsWindow/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_styles/panel = SubResource("StyleBoxEmpty_n1pol")
+
+[node name="SettingsVboxContainer" type="VBoxContainer" parent="DarkPane/SettingsWindow/VBoxContainer/SettingsContainer"]
+layout_mode = 2
+size_flags_vertical = 4
+
+[node name="MusicContainer" type="PanelContainer" parent="DarkPane/SettingsWindow/VBoxContainer/SettingsContainer/SettingsVboxContainer"]
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxEmpty_bahiu")
+
+[node name="Label" type="Label" parent="DarkPane/SettingsWindow/VBoxContainer/SettingsContainer/SettingsVboxContainer/MusicContainer"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("1_1yqph")
+theme_override_font_sizes/font_size = 32
+theme_override_styles/normal = SubResource("StyleBoxEmpty_rkhq4")
+text = "Music:"
+
+[node name="MusicButton" type="Button" parent="DarkPane/SettingsWindow/VBoxContainer/SettingsContainer/SettingsVboxContainer/MusicContainer"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(50, 0)
+layout_mode = 2
+size_flags_horizontal = 8
+size_flags_vertical = 4
+theme_override_fonts/font = ExtResource("1_1yqph")
+text = "On"
+
+[node name="SoundEffectsContainer" type="PanelContainer" parent="DarkPane/SettingsWindow/VBoxContainer/SettingsContainer/SettingsVboxContainer"]
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxEmpty_bahiu")
+
+[node name="Label" type="Label" parent="DarkPane/SettingsWindow/VBoxContainer/SettingsContainer/SettingsVboxContainer/SoundEffectsContainer"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("1_1yqph")
+theme_override_font_sizes/font_size = 32
+theme_override_styles/normal = SubResource("StyleBoxEmpty_rkhq4")
+text = "SFX:"
+
+[node name="SoundEffectsButton" type="Button" parent="DarkPane/SettingsWindow/VBoxContainer/SettingsContainer/SettingsVboxContainer/SoundEffectsContainer"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(50, 0)
+layout_mode = 2
+size_flags_horizontal = 8
+size_flags_vertical = 4
+theme_override_fonts/font = ExtResource("1_1yqph")
+text = "On"
+
+[connection signal="pressed" from="DarkPane/SettingsWindow/VBoxContainer/Header/CloseButton" to="." method="_on_close_button_pressed"]
+[connection signal="pressed" from="DarkPane/SettingsWindow/VBoxContainer/SettingsContainer/SettingsVboxContainer/MusicContainer/MusicButton" to="." method="_on_music_button_pressed"]
+[connection signal="pressed" from="DarkPane/SettingsWindow/VBoxContainer/SettingsContainer/SettingsVboxContainer/SoundEffectsContainer/SoundEffectsButton" to="." method="_on_sound_effects_button_pressed"]

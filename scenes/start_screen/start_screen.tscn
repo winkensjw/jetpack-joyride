@@ -1,34 +1,19 @@
-[gd_scene load_steps=8 format=3 uid="uid://bod60lceunai5"]
+[gd_scene load_steps=13 format=3 uid="uid://bod60lceunai5"]
 
 [ext_resource type="Texture2D" uid="uid://25qmydaxy35y" path="res://resources/sprites/main_menu.jpg" id="1_076i8"]
 [ext_resource type="Script" path="res://scenes/start_screen/start_screen.gd" id="1_t1uvc"]
 [ext_resource type="FontFile" uid="uid://b6oytbii1s7h" path="res://resources/fonts/mago3.ttf" id="2_i0epl"]
 [ext_resource type="AudioStream" uid="uid://c8nkjvt3yfxuf" path="res://resources/audio/music/main_theme.wav" id="3_rifvs"]
-
-[sub_resource type="Animation" id="Animation_w8ct6"]
-resource_name = "text_blink"
-length = 2.0
-loop_mode = 1
-step = 0.5
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("Label:visible")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0.0333333, 1, 2),
-"transitions": PackedFloat32Array(1, 1, 1),
-"update": 1,
-"values": [true, false, true]
-}
+[ext_resource type="Texture2D" uid="uid://dl6prb1dp47rw" path="res://resources/sprites/menu_button.png" id="4_61rnk"]
+[ext_resource type="Texture2D" uid="uid://c0ucun60lv6fb" path="res://resources/sprites/coins.png" id="4_oe6by"]
+[ext_resource type="PackedScene" uid="uid://dc3rmgc8kijcx" path="res://scenes/main_menu/settings_dialog/settings_dialog.tscn" id="7_n5kah"]
 
 [sub_resource type="Animation" id="Animation_ljl1p"]
 length = 0.001
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("Label:visible")
+tracks/0/path = NodePath("StartLabel:visible")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
@@ -38,31 +23,62 @@ tracks/0/keys = {
 "values": [true]
 }
 
+[sub_resource type="Animation" id="Animation_w8ct6"]
+resource_name = "text_blink"
+length = 2.0
+loop_mode = 1
+step = 0.5
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("StartLabel:visible")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0.0333333, 1, 2),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 1,
+"values": [true, false, true]
+}
+
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_0utbm"]
 _data = {
 "RESET": SubResource("Animation_ljl1p"),
 "text_blink": SubResource("Animation_w8ct6")
 }
 
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_1f6gx"]
+content_margin_left = 12.0
+content_margin_top = 12.0
+content_margin_right = 12.0
+content_margin_bottom = 12.0
+bg_color = Color(0.0588235, 0.113725, 0.215686, 1)
+shadow_size = 10
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_gjrqp"]
+bg_color = Color(0.121569, 0.160784, 0.270588, 1)
+
 [node name="StartScreen" type="CanvasLayer"]
 script = ExtResource("1_t1uvc")
 
-[node name="Control" type="Control" parent="."]
+[node name="Background" type="Control" parent="."]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+mouse_filter = 1
 
-[node name="BackgroundImage" type="TextureRect" parent="Control"]
+[node name="BackgroundImage" type="TextureRect" parent="Background"]
 unique_name_in_owner = true
 layout_mode = 0
 offset_right = 1280.0
 offset_bottom = 720.0
 texture = ExtResource("1_076i8")
 
-[node name="Label" type="Label" parent="Control"]
+[node name="StartLabel" type="Label" parent="Background"]
+unique_name_in_owner = true
 layout_mode = 1
 anchors_preset = 7
 anchor_left = 0.5
@@ -81,15 +97,76 @@ theme_override_font_sizes/font_size = 64
 text = "PRESS ANY BUTTON TO PLAY!"
 horizontal_alignment = 1
 
-[node name="AnimationPlayer" type="AnimationPlayer" parent="Control"]
+[node name="AnimationPlayer" type="AnimationPlayer" parent="Background"]
 libraries = {
 "": SubResource("AnimationLibrary_0utbm")
 }
 autoplay = "text_blink"
 
-[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+[node name="MenuBar" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -390.0
+offset_bottom = 104.0
+grow_horizontal = 0
+size_flags_horizontal = 0
+mouse_filter = 1
+
+[node name="PanelContainer" type="PanelContainer" parent="MenuBar"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 1
+theme_override_styles/panel = SubResource("StyleBoxFlat_1f6gx")
+
+[node name="HBoxContainer" type="HBoxContainer" parent="MenuBar/PanelContainer"]
+layout_mode = 2
+theme_override_constants/separation = 10
+
+[node name="PanelContainer" type="PanelContainer" parent="MenuBar/PanelContainer/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+mouse_filter = 1
+theme_override_styles/panel = SubResource("StyleBoxFlat_gjrqp")
+
+[node name="HBoxContainer" type="HBoxContainer" parent="MenuBar/PanelContainer/HBoxContainer/PanelContainer"]
+layout_mode = 2
+theme_override_constants/separation = -15
+
+[node name="MenuCoinsLabel" type="Label" parent="MenuBar/PanelContainer/HBoxContainer/PanelContainer/HBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 6
+mouse_filter = 1
+theme_override_fonts/font = ExtResource("2_i0epl")
+theme_override_font_sizes/font_size = 64
+text = "1,150"
+
+[node name="MenuCoinsImage" type="TextureRect" parent="MenuBar/PanelContainer/HBoxContainer/PanelContainer/HBoxContainer"]
+layout_mode = 2
+texture = ExtResource("4_oe6by")
+expand_mode = 3
+
+[node name="SettingsButton" type="TextureButton" parent="MenuBar/PanelContainer/HBoxContainer"]
+custom_minimum_size = Vector2(80, 80)
+layout_mode = 2
+size_flags_vertical = 4
+texture_normal = ExtResource("4_61rnk")
+stretch_mode = 0
+
+[node name="StartScreenMusic" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("3_rifvs")
 volume_db = -15.0
-autoplay = true
 
-[connection signal="gui_input" from="Control" to="Control" method="_on_gui_input"]
+[node name="SettingsDialog" parent="." instance=ExtResource("7_n5kah")]
+unique_name_in_owner = true
+visible = false
+
+[connection signal="pressed" from="MenuBar/PanelContainer/HBoxContainer/SettingsButton" to="." method="_on_settings_button_pressed"]
+[connection signal="settings_cancel_button_pressed" from="SettingsDialog" to="." method="_on_settings_dialog_settings_cancel_button_pressed"]
+[connection signal="settings_music_button_pressed" from="SettingsDialog" to="." method="_on_settings_dialog_settings_music_button_pressed"]
