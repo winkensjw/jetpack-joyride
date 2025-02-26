@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://bcaa8kvl7rl22"
-path="res://.godot/imported/barry.png-cb540edec7e8ec5d646ca01e79e028a4.ctex"
+uid="uid://txshsnfyf760"
+path="res://.godot/imported/Projectile.png-6bb2e46be748833e3c4ac33ef52b92c0.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://resources/sprites/barry.png"
-dest_files=["res://.godot/imported/barry.png-cb540edec7e8ec5d646ca01e79e028a4.ctex"]
+source_file="res://resources/sprites/Projectile.png"
+dest_files=["res://.godot/imported/Projectile.png-6bb2e46be748833e3c4ac33ef52b92c0.ctex"]
 
 [params]
 
