@@ -23,3 +23,5 @@ motion_mirroring = Vector2(1362.42, 0)
 position = Vector2(643, 362)
 scale = Vector2(0.71, 0.71)
 texture = ExtResource("1_5ew5c")
+
+[node name="Bullets" type="Node2D" parent="." groups=["bullets"]]

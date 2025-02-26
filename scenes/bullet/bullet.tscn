@@ -20,3 +20,9 @@ texture = ExtResource("1_rf66n")
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(33, -1)
 shape = SubResource("RectangleShape2D_u61c1")
+
+[node name="VisibleChecker" type="VisibleOnScreenNotifier2D" parent="."]
+position = Vector2(10, -1)
+
+[connection signal="visibility_changed" from="." to="." method="_on_visibility_changed"]
+[connection signal="screen_exited" from="VisibleChecker" to="." method="_on_visible_checker_screen_exited"]
