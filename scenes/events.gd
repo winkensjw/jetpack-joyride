@@ -11,3 +11,8 @@ signal _scene_failed_to_load(scene_path:String)
 
 # start screen
 signal start_screen_closed
+
+# settings
+signal settings_window_closed
+signal settings_music_changed
+signal settings_sound_effects_changed

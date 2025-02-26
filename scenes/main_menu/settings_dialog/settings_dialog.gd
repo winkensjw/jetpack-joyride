@@ -12,13 +12,13 @@ func _ready() -> void:
 	updateButtonLabel(soundEffectsButton, Globals.sound_effects_enabled)
 
 func _on_close_button_pressed() -> void:
-	emit_signal("settings_cancel_button_pressed")
+	Events.emit_signal("settings_window_closed")
 
 
 func _on_music_button_pressed() -> void:
 	Globals.music_enabled = !Globals.music_enabled
 	updateButtonLabel(musicButton, Globals.music_enabled)
-	emit_signal("settings_music_button_pressed")
+	Events.emit_signal("settings_music_changed")
 
 func updateButtonLabel(button : Button, value : bool) -> void:
 	button.text = "On" if value else "Off"
@@ -26,4 +26,4 @@ func updateButtonLabel(button : Button, value : bool) -> void:
 func _on_sound_effects_button_pressed() -> void:
 	Globals.sound_effects_enabled = !Globals.sound_effects_enabled
 	updateButtonLabel(soundEffectsButton, Globals.sound_effects_enabled)
-	emit_signal("settings_sound_effect_button_pressed")
+	Events.emit_signal("settings_sound_effects_changed")
