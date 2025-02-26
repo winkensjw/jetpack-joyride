@@ -9,6 +9,33 @@
 [node name="Game" type="Node2D"]
 script = ExtResource("1_g7dqg")
 
+[node name="UI" type="CanvasLayer" parent="."]
+
+[node name="Label" type="Label" parent="UI"]
+unique_name_in_owner = true
+offset_right = 226.0
+offset_bottom = 83.0
+theme_override_font_sizes/font_size = 60
+text = "Score: 0"
+
+[node name="CoinsLabel" type="Label" parent="UI"]
+unique_name_in_owner = true
+offset_top = 83.0
+offset_right = 226.0
+offset_bottom = 166.0
+theme_override_font_sizes/font_size = 60
+text = "Coins: 0"
+
+[node name="Timers" type="Node2D" parent="."]
+
+[node name="EnemySpawnTimer" type="Timer" parent="Timers"]
+wait_time = 0.5
+autostart = true
+
+[node name="SpinnerSpawnTimer" type="Timer" parent="Timers"]
+wait_time = 7.0
+autostart = true
+
 [node name="Background" type="Node2D" parent="."]
 
 [node name="Floor" parent="Background" instance=ExtResource("2_d42ho")]
@@ -25,7 +52,7 @@ position = Vector2(643, 362)
 scale = Vector2(0.71, 0.71)
 texture = ExtResource("1_5ew5c")
 
-[node name="CharacterBody2D" parent="." instance=ExtResource("1_xss6h")]
+[node name="CharacterBody2D" parent="." groups=["barry"] instance=ExtResource("1_xss6h")]
 position = Vector2(157, 539)
 
 [node name="Bullets" type="Node2D" parent="." groups=["bullets"]]
@@ -35,3 +62,6 @@ position = Vector2(157, 539)
 [node name="Coins" type="Node2D" parent="." groups=["coins"]]
 
 [node name="Obstacles" type="Node2D" parent="." groups=["obstacles"]]
+
+[connection signal="timeout" from="Timers/EnemySpawnTimer" to="." method="_on_enemy_spawn_timer_timeout"]
+[connection signal="timeout" from="Timers/SpinnerSpawnTimer" to="." method="_on_spinner_spawn_timer_timeout"]

@@ -16,3 +16,6 @@ signal start_screen_closed
 signal settings_window_closed
 signal settings_music_changed
 signal settings_sound_effects_changed
+
+# game
+signal player_died

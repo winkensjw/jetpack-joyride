@@ -51,7 +51,4 @@ shoot={
 2d_physics/layer_3="Coins"
 2d_physics/layer_4="Enemies"
 2d_physics/layer_5="levelborder"
-
-[rendering]
-
-textures/canvas_textures/default_texture_filter=0
+2d_physics/layer_6="obstacles"

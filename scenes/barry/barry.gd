@@ -13,11 +13,13 @@ var idle_sprite = preload("res://resources/sprites/barry-flying-idle.png")
 var boost_sprite  = preload("res://resources/sprites/barry-flying-boost.png")
 var bullet_scene = preload("res://scenes/bullet/bullet.tscn")
 
-const BOOST_VELOCITY = -2000.0
-const SPEED = 300.0
+const BOOST_VELOCITY = -2500.0
+const SPEED = 600.0
 	
 func _process(_delta: float) -> void:
 	if not Globals.game_running:
+		machineGunAudio.stop()
+		particles.emitting = false
 		return
 	if Input.is_action_pressed("boost"):
 		sprite.texture = boost_sprite
@@ -46,6 +48,7 @@ func _physics_process(delta: float) -> void:
 func _fireBullet() -> void:
 	var bullet = bullet_scene.instantiate()
 	get_tree().get_first_node_in_group("bullets").add_child(bullet)
+	bullet.add_to_group("bullets")
 	bullet.global_position = bulletspawn.global_position
 	if Globals.sound_effects_enabled:
 		laserAudio.play()
