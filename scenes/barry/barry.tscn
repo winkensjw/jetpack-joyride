@@ -1,8 +1,10 @@
-[gd_scene load_steps=6 format=3 uid="uid://dhvaxn0fiv8ly"]
+[gd_scene load_steps=8 format=3 uid="uid://dhvaxn0fiv8ly"]
 
 [ext_resource type="Texture2D" uid="uid://r62e38c7mwd0" path="res://resources/sprites/barry-flying-idle.png" id="1_gubm0"]
 [ext_resource type="Script" path="res://scenes/barry/barry.gd" id="1_qm3q5"]
 [ext_resource type="Texture2D" uid="uid://bnugb888y5you" path="res://resources/sprites/Bullet_Shell.png" id="2_dy014"]
+[ext_resource type="AudioStream" uid="uid://ds7nmy7p0jxuv" path="res://resources/audio/sfx/clean-machine-gun-burst-98224.mp3" id="4_2upli"]
+[ext_resource type="AudioStream" uid="uid://b5rjbakh03dl3" path="res://resources/audio/sfx/laser-shot-ingame-230500.mp3" id="5_5h6ot"]
 
 [sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_jmmsx"]
 particle_flag_disable_z = true
@@ -51,3 +53,10 @@ shape = SubResource("CapsuleShape2D_w4hj6")
 position = Vector2(453, -4)
 limit_top = 0
 limit_bottom = 0
+
+[node name="MachineGunAudio" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("4_2upli")
+parameters/looping = true
+
+[node name="LaserAudio" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("5_5h6ot")
