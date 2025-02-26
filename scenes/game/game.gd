@@ -14,6 +14,7 @@ func _process(delta: float) -> void:
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	Events.connect("player_died", Callable(self, "_on_player_died"))
+	Events.connect("coin_collected", Callable(self, "_on_coin_collected"))
 	Globals.game_running = true
 	_spawn_enemy()
 	
@@ -53,6 +54,9 @@ func update_distance() -> void:
 	Globals.distance = int(player.global_position.x / 150)
 	scorelabel.text = "Score:" + str(Globals.distance) + "m"
 
+func _on_coin_collected(value : int) -> void:
+	update_coins(value)
+	
 func update_coins(value : int) -> void:
 	Globals.coins += value
 	coinslabel.text = "Coins:"  + str(Globals.coins)

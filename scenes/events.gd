@@ -19,3 +19,4 @@ signal settings_sound_effects_changed
 
 # game
 signal player_died
+signal coin_collected(value:int)

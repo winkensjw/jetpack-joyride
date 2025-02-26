@@ -1,0 +1,29 @@
+[gd_scene load_steps=5 format=3 uid="uid://m715k2cqvx8a"]
+
+[ext_resource type="Script" path="res://scenes/coins/coin.gd" id="1_2a3kv"]
+[ext_resource type="Texture2D" uid="uid://bta3q36pm4m1q" path="res://resources/sprites/Münze.png" id="1_t6lr2"]
+[ext_resource type="AudioStream" uid="uid://cys7023yofkoj" path="res://resources/audio/sfx/coin_2-89099.mp3" id="3_o1w7t"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_od0nj"]
+radius = 17.0294
+
+[node name="Coin" type="Node2D"]
+script = ExtResource("1_2a3kv")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+scale = Vector2(0.075, 0.075)
+texture = ExtResource("1_t6lr2")
+
+[node name="Area2D" type="Area2D" parent="."]
+collision_layer = 4
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+shape = SubResource("CircleShape2D_od0nj")
+
+[node name="VisibleChecker" type="VisibleOnScreenNotifier2D" parent="."]
+
+[node name="CoinAudio" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("3_o1w7t")
+
+[connection signal="body_entered" from="Area2D" to="." method="_on_area_2d_body_entered"]
+[connection signal="screen_exited" from="VisibleChecker" to="." method="_on_visible_checker_screen_exited"]
