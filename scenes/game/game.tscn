@@ -1,11 +1,13 @@
-[gd_scene load_steps=5 format=3 uid="uid://byoj1ms6tpcpc"]
+[gd_scene load_steps=6 format=3 uid="uid://byoj1ms6tpcpc"]
 
 [ext_resource type="Texture2D" uid="uid://mdm4pwpctn22" path="res://resources/sprites/Map.png" id="1_5ew5c"]
+[ext_resource type="Script" path="res://scenes/game/game.gd" id="1_g7dqg"]
 [ext_resource type="PackedScene" uid="uid://dhvaxn0fiv8ly" path="res://scenes/barry/barry.tscn" id="1_xss6h"]
 [ext_resource type="PackedScene" uid="uid://u5c3wc5ygn4y" path="res://scenes/floor/floor.tscn" id="2_d42ho"]
 [ext_resource type="PackedScene" uid="uid://c4q7jgi3gw7yn" path="res://scenes/ceiling/ceiling.tscn" id="3_pluc3"]
 
 [node name="Game" type="Node2D"]
+script = ExtResource("1_g7dqg")
 
 [node name="Background" type="Node2D" parent="."]
 

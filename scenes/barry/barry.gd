@@ -15,11 +15,10 @@ var bullet_scene = preload("res://scenes/bullet/bullet.tscn")
 
 const BOOST_VELOCITY = -2000.0
 const SPEED = 300.0
-
-func _ready() -> void:
-	pass
 	
 func _process(_delta: float) -> void:
+	if not Globals.game_running:
+		return
 	if Input.is_action_pressed("boost"):
 		sprite.texture = boost_sprite
 		particles.emitting = true
@@ -34,8 +33,8 @@ func _process(_delta: float) -> void:
 		_fireBullet()
 
 func _physics_process(delta: float) -> void:
-	#if not Globals.game_running:
-	#	return FIXME
+	if not Globals.game_running:
+		return
 	velocity += get_gravity()  * delta
 	velocity.x = SPEED
 	
