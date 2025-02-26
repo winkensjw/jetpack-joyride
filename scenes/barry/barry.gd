@@ -46,7 +46,7 @@ func _physics_process(delta: float) -> void:
 	
 func _fireBullet() -> void:
 	var bullet = bullet_scene.instantiate()
-	get_tree().root.add_child(bullet)
+	get_tree().get_first_node_in_group("bullets").add_child(bullet)
 	bullet.global_position = bulletspawn.global_position
 	if Globals.sound_effects_enabled:
 		laserAudio.play()

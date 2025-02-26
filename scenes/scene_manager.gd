@@ -17,7 +17,7 @@ func _ready() -> void:
 func _add_loading_screen(transition_type:String="fade_to_black"):
 	_transition = "no_to_transition" if transition_type == "no_transition" else transition_type
 	_loading_screen = _loading_screen_scene.instantiate() as LoadingScreen
-	get_tree().root.add_child(_loading_screen)
+	add_child(_loading_screen)
 	_loading_screen.start_transition(_transition)
 	
 func change_scenes(scene_to_load:String, load_into:Node=null, scene_to_unload:Node=null, transition_type:String="fade_to_black") -> void:
@@ -46,7 +46,7 @@ func _load_scene(scene_path:String) -> void:
 	_load_progress_timer.wait_time = 0.1
 	_load_progress_timer.timeout.connect(_monitor_load_status)
 	
-	get_tree().root.add_child(_load_progress_timer)
+	add_child(_load_progress_timer)
 	_load_progress_timer.start()
 
 func _monitor_load_status() -> void:
