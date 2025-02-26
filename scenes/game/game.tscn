@@ -1,0 +1,25 @@
+[gd_scene load_steps=5 format=3 uid="uid://byoj1ms6tpcpc"]
+
+[ext_resource type="Texture2D" uid="uid://mdm4pwpctn22" path="res://resources/sprites/Map.png" id="1_5ew5c"]
+[ext_resource type="PackedScene" uid="uid://dhvaxn0fiv8ly" path="res://scenes/barry/barry.tscn" id="1_xss6h"]
+[ext_resource type="PackedScene" uid="uid://u5c3wc5ygn4y" path="res://scenes/floor/floor.tscn" id="2_d42ho"]
+[ext_resource type="PackedScene" uid="uid://c4q7jgi3gw7yn" path="res://scenes/ceiling/ceiling.tscn" id="3_pluc3"]
+
+[node name="Game" type="Node2D"]
+
+[node name="Ceiling" parent="." instance=ExtResource("3_pluc3")]
+
+[node name="Floor" parent="." instance=ExtResource("2_d42ho")]
+
+[node name="CharacterBody2D" parent="." instance=ExtResource("1_xss6h")]
+position = Vector2(157, 539)
+
+[node name="ParallaxBackground" type="ParallaxBackground" parent="."]
+
+[node name="ParallaxLayer" type="ParallaxLayer" parent="ParallaxBackground"]
+motion_mirroring = Vector2(1362.42, 0)
+
+[node name="Sprite2D" type="Sprite2D" parent="ParallaxBackground/ParallaxLayer"]
+position = Vector2(643, 362)
+scale = Vector2(0.71, 0.71)
+texture = ExtResource("1_5ew5c")

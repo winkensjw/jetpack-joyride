@@ -10,8 +10,8 @@ var idle_sprite = preload("res://resources/sprites/barry-flying-idle.png")
 var boost_sprite  = preload("res://resources/sprites/barry-flying-boost.png")
 var bullet_scene = preload("res://scenes/bullet/bullet.tscn")
 
-const BOOST_VELOCITY = -250.0
-const SPEED = 100.0
+const BOOST_VELOCITY = -2000.0
+const SPEED = 300.0
 
 func _ready() -> void:
 	pass
@@ -30,11 +30,11 @@ func _process(_delta: float) -> void:
 func _physics_process(delta: float) -> void:
 	#if not Globals.game_running:
 	#	return FIXME
-	velocity += get_gravity() * delta
+	velocity += get_gravity()  * delta
 	velocity.x = SPEED
 	
 	if Input.is_action_pressed("boost"):
-		velocity.y = BOOST_VELOCITY
+		velocity.y = clampf(velocity.y + BOOST_VELOCITY * delta, -10000, 10000)
 	
 	move_and_slide()
 	

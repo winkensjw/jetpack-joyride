@@ -1,0 +1,12 @@
+[gd_scene load_steps=2 format=3 uid="uid://c4q7jgi3gw7yn"]
+
+[sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_u2ivq"]
+
+[node name="Ceiling" type="Node2D"]
+
+[node name="Area2D" type="StaticBody2D" parent="."]
+collision_layer = 16
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+rotation = -3.14159
+shape = SubResource("WorldBoundaryShape2D_u2ivq")

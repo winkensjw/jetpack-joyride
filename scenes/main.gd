@@ -1,6 +1,5 @@
 extends Node2D
 
-var start_screen_scene = preload("res://scenes/start_screen/start_screen.tscn")
 var current_scene
 
 # Called when the node enters the scene tree for the first time.
@@ -17,4 +16,4 @@ func _on_scene_changed(loaded_scene:Node) -> void:
 	current_scene = loaded_scene
 
 func _on_start_screen_closed() -> void:
-	SceneManager.change_scenes("res://scenes/start_screen/start_screen.tscn", self, current_scene)
+	SceneManager.change_scenes("res://scenes/game/game.tscn", self, current_scene)
