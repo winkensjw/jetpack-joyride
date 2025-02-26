@@ -1,14 +1,20 @@
 extends Node2D
 
-@onready var start_screen = preload("res://scenes/start_screen/start_screen.tscn")
-# is there some kind of bean manager to hold these references without the hassle?
-var start_screen_instance
+var start_screen_scene = preload("res://scenes/start_screen/start_screen.tscn")
+var current_scene
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
+	Events.connect("load_complete", Callable(self, "_on_scene_changed"))
 	Events.connect("start_screen_closed", Callable(self, "_on_start_screen_closed"))
-	start_screen_instance = start_screen.instantiate()
-	add_child(start_screen_instance)
+	# call this deferred as root node is not ready yet and scene manager is adding to that node
+	call_deferred("_add_start_screne")
+	
+func _add_start_screne() -> void:
+	SceneManager.change_scenes("res://scenes/start_screen/start_screen.tscn", self, null, "no_transition")
+	
+func _on_scene_changed(loaded_scene:Node) -> void:
+	current_scene = loaded_scene
 
 func _on_start_screen_closed() -> void:
-	start_screen_instance.queue_free()
+	SceneManager.change_scenes("res://scenes/start_screen/start_screen.tscn", self, current_scene)

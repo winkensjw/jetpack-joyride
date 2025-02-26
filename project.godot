@@ -19,6 +19,7 @@ config/features=PackedStringArray("4.3", "Forward Plus")
 Events="*res://scenes/events.gd"
 Globals="*res://scenes/globals.gd"
 SaveManager="*res://scenes/save_manager.gd"
+SceneManager="*res://scenes/scene_manager.gd"
 
 [debug]
 
