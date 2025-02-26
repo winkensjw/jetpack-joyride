@@ -36,6 +36,10 @@ autostart = true
 wait_time = 7.0
 autostart = true
 
+[node name="CoinSpawnTimer" type="Timer" parent="Timers"]
+wait_time = 9.0
+autostart = true
+
 [node name="Background" type="Node2D" parent="."]
 
 [node name="Floor" parent="Background" instance=ExtResource("2_d42ho")]
@@ -65,3 +69,4 @@ position = Vector2(157, 539)
 
 [connection signal="timeout" from="Timers/EnemySpawnTimer" to="." method="_on_enemy_spawn_timer_timeout"]
 [connection signal="timeout" from="Timers/SpinnerSpawnTimer" to="." method="_on_spinner_spawn_timer_timeout"]
+[connection signal="timeout" from="Timers/CoinSpawnTimer" to="." method="_on_coin_spawn_timer_timeout"]

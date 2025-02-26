@@ -4,10 +4,6 @@ const VALUE = 1
 
 @onready var coinAudio = $CoinAudio
 
-func _process(delta: float) -> void:
-	#coinAudio.play()
-	pass
-
 func _on_area_2d_body_entered(body: Node2D) -> void:
 	if body.is_in_group("barry"):
 		Events.emit_signal("coin_collected", VALUE)

@@ -2,12 +2,13 @@ extends Node2D
 
 var enemy_scene = load("res://scenes/enemy/enemy.tscn")
 var spinner_scene = load("res://scenes/spinner/spinner.tscn")
+var coin_group_scene = load("res://scenes/coins/coin_group.tscn")
 
 @onready var player = get_tree().get_first_node_in_group("barry")
 @onready var scorelabel = %Label;
 @onready var coinslabel = %CoinsLabel;
 
-func _process(delta: float) -> void:
+func _process(_delta: float) -> void:
 	update_distance()
 	update_coins(0)
 	
@@ -42,7 +43,7 @@ func _on_spinner_spawn_timer_timeout() -> void:
 	_spawn_spinner()
 
 func _spawn_spinner() -> void:
-	if randi_range(0, 100) < 10:
+	if randi_range(0, 100) < 15:
 		return
 	var spinner = spinner_scene.instantiate()
 	spinner.position.x = player.position.x + 1280
@@ -60,3 +61,18 @@ func _on_coin_collected(value : int) -> void:
 func update_coins(value : int) -> void:
 	Globals.coins += value
 	coinslabel.text = "Coins:"  + str(Globals.coins)
+
+
+func _on_coin_spawn_timer_timeout() -> void:
+	if not Globals.game_running:
+		return
+	_spawn_coins()
+
+func _spawn_coins() -> void:
+	if randi_range(0, 100) < 25:
+		return
+	var coin_group = coin_group_scene.instantiate()
+	coin_group.position.x = player.position.x + 1280
+	coin_group.position.y = randi() % 350 + 150
+	get_tree().get_first_node_in_group("coins").add_child(coin_group)
+	coin_group.add_to_group("coins")
