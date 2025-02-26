@@ -5,11 +5,10 @@ extends CharacterBody2D
 @onready var particles = $GPUParticles2D
 @onready var bulletspawn = $BulletSpawn
 
-@onready var idle_sprite = _loadImageTexture("res://resources/sprites/barry-flying-idle.png")
-@onready var boost_sprite  = _loadImageTexture("res://resources/sprites/barry-flying-boost.png")
 
+var idle_sprite = preload("res://resources/sprites/barry-flying-idle.png")
+var boost_sprite  = preload("res://resources/sprites/barry-flying-boost.png")
 var bullet_scene = preload("res://scenes/bullet/bullet.tscn")
-
 
 const BOOST_VELOCITY = -250.0
 const SPEED = 100.0
@@ -43,7 +42,3 @@ func _fireBullet() -> void:
 	var bullet = bullet_scene.instantiate()
 	get_tree().root.add_child(bullet)
 	bullet.global_position = bulletspawn.global_position
-	
-func _loadImageTexture(path:String) -> ImageTexture:
-	var image = Image.load_from_file(path)
-	return ImageTexture.create_from_image(image)
