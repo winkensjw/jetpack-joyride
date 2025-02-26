@@ -1,49 +1,47 @@
 [gd_scene load_steps=6 format=3 uid="uid://dhvaxn0fiv8ly"]
 
-[ext_resource type="Texture2D" uid="uid://cpnbfo2ut2hmg" path="res://resources/sprites/explosion.png" id="1_jxd3x"]
-[ext_resource type="Texture2D" uid="uid://bcaa8kvl7rl22" path="res://resources/sprites/barry.png" id="2_i8ntq"]
-[ext_resource type="Texture2D" uid="uid://k32svmfwd3u5" path="res://resources/sprites/bullet.png" id="3_yavga"]
-
-[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_w4hj6"]
-radius = 26.0161
-height = 82.0075
+[ext_resource type="Texture2D" uid="uid://r62e38c7mwd0" path="res://resources/sprites/barry-flying-idle.png" id="1_gubm0"]
+[ext_resource type="Script" path="res://scenes/barry/barry.gd" id="1_qm3q5"]
+[ext_resource type="Texture2D" uid="uid://bnugb888y5you" path="res://resources/sprites/Bullet_Shell.png" id="2_dy014"]
 
 [sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_jmmsx"]
 particle_flag_disable_z = true
 emission_shape = 1
 emission_sphere_radius = 19.85
-angle_min = 1.07288e-05
-angle_max = 596.1
+angle_min = 123.9
+angle_max = 720.0
 flatness = 0.742
-angular_velocity_min = -185.8
-angular_velocity_max = 224.52
-gravity = Vector3(0, 98, 0)
+angular_velocity_min = -23.22
+angular_velocity_max = 387.1
+gravity = Vector3(-100, 500, 0)
 tangential_accel_min = 56.9
 tangential_accel_max = 56.9
-scale_min = 0.33
-scale_max = 0.33
+scale_min = 0.03
+scale_max = 0.03
 
-[node name="Barry" type="Node2D"]
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_w4hj6"]
+radius = 49.9897
+height = 99.9794
 
-[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+[node name="CharacterBody2D" type="CharacterBody2D"]
+script = ExtResource("1_qm3q5")
 
-[node name="CharacterBody2D" type="CharacterBody2D" parent="."]
+[node name="BulletSpawn" type="Marker2D" parent="."]
+position = Vector2(71, -4)
 
-[node name="ExplosionSprite" type="Sprite2D" parent="CharacterBody2D"]
-position = Vector2(-44, 25)
-texture = ExtResource("1_jxd3x")
+[node name="GPUParticles2D" type="GPUParticles2D" parent="."]
+position = Vector2(-50, 24)
+emitting = false
+amount = 40
+process_material = SubResource("ParticleProcessMaterial_jmmsx")
+texture = ExtResource("2_dy014")
+lifetime = 5.0
 
-[node name="BarrySprite" type="Sprite2D" parent="CharacterBody2D"]
-texture = ExtResource("2_i8ntq")
+[node name="BarrySprite" type="Sprite2D" parent="."]
+scale = Vector2(0.25, 0.25)
+texture = ExtResource("1_gubm0")
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="CharacterBody2D"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(-4, -5)
 rotation = 0.00849494
 shape = SubResource("CapsuleShape2D_w4hj6")
-
-[node name="GPUParticles2D" type="GPUParticles2D" parent="."]
-position = Vector2(-38, 29)
-amount = 20
-process_material = SubResource("ParticleProcessMaterial_jmmsx")
-texture = ExtResource("3_yavga")
-lifetime = 5.0
