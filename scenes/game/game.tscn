@@ -7,21 +7,29 @@
 
 [node name="Game" type="Node2D"]
 
-[node name="Ceiling" parent="." instance=ExtResource("3_pluc3")]
+[node name="Background" type="Node2D" parent="."]
 
-[node name="Floor" parent="." instance=ExtResource("2_d42ho")]
+[node name="Floor" parent="Background" instance=ExtResource("2_d42ho")]
 
-[node name="CharacterBody2D" parent="." instance=ExtResource("1_xss6h")]
-position = Vector2(157, 539)
+[node name="Ceiling" parent="Background" instance=ExtResource("3_pluc3")]
 
-[node name="ParallaxBackground" type="ParallaxBackground" parent="."]
+[node name="ParallaxBackground" type="ParallaxBackground" parent="Background"]
 
-[node name="ParallaxLayer" type="ParallaxLayer" parent="ParallaxBackground"]
+[node name="ParallaxLayer" type="ParallaxLayer" parent="Background/ParallaxBackground"]
 motion_mirroring = Vector2(1362.42, 0)
 
-[node name="Sprite2D" type="Sprite2D" parent="ParallaxBackground/ParallaxLayer"]
+[node name="Sprite2D" type="Sprite2D" parent="Background/ParallaxBackground/ParallaxLayer"]
 position = Vector2(643, 362)
 scale = Vector2(0.71, 0.71)
 texture = ExtResource("1_5ew5c")
 
+[node name="CharacterBody2D" parent="." instance=ExtResource("1_xss6h")]
+position = Vector2(157, 539)
+
 [node name="Bullets" type="Node2D" parent="." groups=["bullets"]]
+
+[node name="Enemies" type="Node2D" parent="." groups=["enemies"]]
+
+[node name="Coins" type="Node2D" parent="." groups=["coins"]]
+
+[node name="Obstacles" type="Node2D" parent="." groups=["obstacles"]]
