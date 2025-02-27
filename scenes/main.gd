@@ -9,6 +9,7 @@ func _ready() -> void:
 	Events.connect("load_complete", Callable(self, "_on_scene_changed"))
 	Events.connect("start_screen_closed", Callable(self, "_on_start_screen_closed"))
 	Events.connect("settings_music_changed", Callable(self, "updateMusic"))
+	Events.connect("back_to_menu", Callable(self, "_on_back_to_menu"))
 	updateMusic()
 	# call this deferred as root node is not ready yet and scene manager is adding to that node
 	call_deferred("_add_start_screne")
@@ -29,3 +30,6 @@ func updateMusic() -> void:
 		background_music.play()
 	elif(!music_enabled && isPlaying):
 		background_music.stop()
+
+func _on_back_to_menu() -> void:
+		SceneManager.change_scenes("res://scenes/start_screen/start_screen.tscn", self, current_scene)

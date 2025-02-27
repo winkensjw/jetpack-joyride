@@ -5,6 +5,7 @@ var spinner_scene = preload("res://scenes/spinner/spinner.tscn")
 var coin_group_scene = preload("res://scenes/coins/coin_group.tscn")
 var alert_scene = preload("res://scenes/alert/alert.tscn")
 var rocket_scene = preload("res://scenes/rocket/rocket.tscn")
+var continue_screen_scene = preload("res://scenes/continue_screen/continue_screen.tscn")
 
 @onready var player = get_tree().get_first_node_in_group("barry")
 @onready var currentlabel = %CurrentLabel;
@@ -21,6 +22,7 @@ func _process(_delta: float) -> void:
 func _ready() -> void:
 	Events.connect("player_died", Callable(self, "_on_player_died"))
 	Events.connect("coin_collected", Callable(self, "_on_coin_collected"))
+	Events.connect("continue_game", Callable(self, "_on_continue_game"))
 	Globals.game_running = true
 	
 func _on_player_died() -> void:
@@ -28,6 +30,8 @@ func _on_player_died() -> void:
 	if Globals.distance > Globals.best_distance:
 		Globals.best_distance = Globals.distance
 	Globals.saveData()
+	var continue_screen = continue_screen_scene.instantiate()
+	get_tree().root.add_child(continue_screen)
 
 func _on_enemy_spawn_timer_timeout() -> void:
 	if not Globals.game_running:
@@ -108,3 +112,13 @@ func _spawn_rocket() -> void:
 	get_tree().get_first_node_in_group("enemies").add_child(rocket)
 	rocket.add_to_group("enemies")
 	
+func _on_continue_game() -> void:
+	_remove_all_childs_from_group("enemies")
+	_remove_all_childs_from_group("obstacles")
+	_remove_all_childs_from_group("bullets")
+	_remove_all_childs_from_group("coins")
+	Globals.game_running = true
+	
+func _remove_all_childs_from_group(group : String) -> void:
+	for nodes in get_tree().get_first_node_in_group(group).get_children():
+		nodes.queue_free()
