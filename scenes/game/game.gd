@@ -1,15 +1,20 @@
 extends Node2D
 
-var enemy_scene = load("res://scenes/enemy/enemy.tscn")
-var spinner_scene = load("res://scenes/spinner/spinner.tscn")
-var coin_group_scene = load("res://scenes/coins/coin_group.tscn")
+var enemy_scene = preload("res://scenes/enemy/enemy.tscn")
+var spinner_scene = preload("res://scenes/spinner/spinner.tscn")
+var coin_group_scene = preload("res://scenes/coins/coin_group.tscn")
+var alert_scene = preload("res://scenes/alert/alert.tscn")
+var rocket_scene = preload("res://scenes/rocket/rocket.tscn")
 
 @onready var player = get_tree().get_first_node_in_group("barry")
-@onready var scorelabel = %Label;
-@onready var coinslabel = %CoinsLabel;
+@onready var currentlabel = %CurrentLabel;
+@onready var bestlabel = %BestLabel;
+@onready var coinslabel = %CoinLabel;
+@onready var ui_canvas = %UI;
 
 func _process(_delta: float) -> void:
 	update_distance()
+	update_best()
 	update_coins(0)
 	
 # Called when the node enters the scene tree for the first time.
@@ -17,11 +22,12 @@ func _ready() -> void:
 	Events.connect("player_died", Callable(self, "_on_player_died"))
 	Events.connect("coin_collected", Callable(self, "_on_coin_collected"))
 	Globals.game_running = true
-	_spawn_enemy()
 	
 func _on_player_died() -> void:
 	Globals.game_running = false
-
+	if Globals.distance > Globals.best_distance:
+		Globals.best_distance = Globals.distance
+	Globals.saveData()
 
 func _on_enemy_spawn_timer_timeout() -> void:
 	if not Globals.game_running:
@@ -43,7 +49,7 @@ func _on_spinner_spawn_timer_timeout() -> void:
 	_spawn_spinner()
 
 func _spawn_spinner() -> void:
-	if randi_range(0, 100) < 15:
+	if randi_range(0, 100) < 25:
 		return
 	var spinner = spinner_scene.instantiate()
 	spinner.position.x = player.position.x + 1280
@@ -53,15 +59,17 @@ func _spawn_spinner() -> void:
 
 func update_distance() -> void:
 	Globals.distance = int(player.global_position.x / 150)
-	scorelabel.text = "Score:" + str(Globals.distance) + "m"
+	currentlabel.text = str(Globals.distance) + "m"
+
+func update_best() -> void:
+	bestlabel.text = str(Globals.best_distance) + "m"
 
 func _on_coin_collected(value : int) -> void:
 	update_coins(value)
 	
 func update_coins(value : int) -> void:
 	Globals.coins += value
-	coinslabel.text = "Coins:"  + str(Globals.coins)
-
+	coinslabel.text = str(Globals.coins)
 
 func _on_coin_spawn_timer_timeout() -> void:
 	if not Globals.game_running:
@@ -69,10 +77,34 @@ func _on_coin_spawn_timer_timeout() -> void:
 	_spawn_coins()
 
 func _spawn_coins() -> void:
-	if randi_range(0, 100) < 25:
+	if randi_range(0, 100) < 30:
 		return
 	var coin_group = coin_group_scene.instantiate()
 	coin_group.position.x = player.position.x + 1280
 	coin_group.position.y = randi() % 350 + 150
 	get_tree().get_first_node_in_group("coins").add_child(coin_group)
 	coin_group.add_to_group("coins")
+
+func _on_rocket_spawn_timer_timeout() -> void:
+	if not Globals.game_running:
+		return
+	_spawn_rocket()
+
+func _spawn_rocket() -> void:
+	if randi_range(0, 100) < 50:
+		return
+	var rocket_y = randi() % 350 + 150
+	
+	var alert = alert_scene.instantiate()
+	alert.position.x = 1200
+	alert.position.y =  rocket_y
+	ui_canvas.add_child(alert)
+	
+	await get_tree().create_tween().tween_interval(1.5).finished
+	
+	var rocket = rocket_scene.instantiate()
+	rocket.position.x = player.position.x + 1280
+	rocket.position.y = rocket_y
+	get_tree().get_first_node_in_group("enemies").add_child(rocket)
+	rocket.add_to_group("enemies")
+	
