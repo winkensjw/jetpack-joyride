@@ -19,6 +19,7 @@ signal settings_sound_effects_changed
 
 # game
 signal player_died
+signal power_up
 signal coin_collected(value:int)
 
 # game over

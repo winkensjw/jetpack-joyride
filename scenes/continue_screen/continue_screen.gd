@@ -1,6 +1,6 @@
 extends CanvasLayer
 
-const CONTINUE_COST = 10
+const CONTINUE_COST = 150
 
 @onready var continueButton = $ContinueScreen/ContinueButton
 

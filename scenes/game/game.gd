@@ -6,6 +6,9 @@ var coin_group_scene = preload("res://scenes/coins/coin_group.tscn")
 var alert_scene = preload("res://scenes/alert/alert.tscn")
 var rocket_scene = preload("res://scenes/rocket/rocket.tscn")
 var continue_screen_scene = preload("res://scenes/continue_screen/continue_screen.tscn")
+var power_up_screen_scene = preload("res://scenes/power_up_scene/power_up_scene.tscn")
+
+var power_up_screen
 
 @onready var player = get_tree().get_first_node_in_group("barry")
 @onready var currentlabel = %CurrentLabel;
@@ -14,22 +17,34 @@ var continue_screen_scene = preload("res://scenes/continue_screen/continue_scree
 @onready var ui_canvas = %UI;
 
 func _process(_delta: float) -> void:
+	if Input.is_action_just_pressed("back_to_menu"):
+		Events.emit_signal("back_to_menu")
+		return
 	update_distance()
 	update_best()
 	update_coins(0)
 	
-# Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	Events.connect("player_died", Callable(self, "_on_player_died"))
 	Events.connect("coin_collected", Callable(self, "_on_coin_collected"))
 	Events.connect("continue_game", Callable(self, "_on_continue_game"))
+	_show_power_up_screen()
 	Globals.game_running = true
+
+func _show_power_up_screen() -> void:
+	power_up_screen = power_up_screen_scene.instantiate()
+	get_tree().root.add_child(power_up_screen)
+	await get_tree().create_tween().tween_interval(5).finished
+	if power_up_screen != null:
+		power_up_screen.queue_free()
 	
 func _on_player_died() -> void:
 	Globals.game_running = false
 	if Globals.distance > Globals.best_distance:
 		Globals.best_distance = Globals.distance
 	Globals.saveData()
+	if power_up_screen != null:
+		power_up_screen.queue_free()
 	var continue_screen = continue_screen_scene.instantiate()
 	get_tree().root.add_child(continue_screen)
 
@@ -122,3 +137,4 @@ func _on_continue_game() -> void:
 func _remove_all_childs_from_group(group : String) -> void:
 	for nodes in get_tree().get_first_node_in_group(group).get_children():
 		nodes.queue_free()
+	

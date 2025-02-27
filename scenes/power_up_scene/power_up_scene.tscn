@@ -1,0 +1,62 @@
+[gd_scene load_steps=5 format=3 uid="uid://4kksv41hmxag"]
+
+[ext_resource type="Texture2D" uid="uid://cou3jv10r4xp" path="res://resources/sprites/Speed.png" id="1_ebct8"]
+[ext_resource type="Script" path="res://scenes/power_up_scene/power_up_scene.gd" id="1_yfxad"]
+[ext_resource type="FontFile" uid="uid://b6oytbii1s7h" path="res://resources/fonts/mago3.ttf" id="2_pr81k"]
+[ext_resource type="Texture2D" uid="uid://bta3q36pm4m1q" path="res://resources/sprites/Münze.png" id="3_3xvtq"]
+
+[node name="PowerUpScreen" type="CanvasLayer"]
+script = ExtResource("1_yfxad")
+
+[node name="Control" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="PowerUpButton" type="TextureButton" parent="Control"]
+custom_minimum_size = Vector2(512, 512)
+layout_mode = 1
+offset_left = 512.0
+offset_top = 128.0
+offset_right = 1024.0
+offset_bottom = 640.0
+scale = Vector2(0.5, 0.5)
+texture_normal = ExtResource("1_ebct8")
+ignore_texture_size = true
+stretch_mode = 4
+
+[node name="Coins" type="HBoxContainer" parent="Control/PowerUpButton"]
+layout_mode = 0
+offset_left = 126.0
+offset_top = 376.0
+offset_right = 417.0
+offset_bottom = 513.0
+
+[node name="MarginContainer2" type="MarginContainer" parent="Control/PowerUpButton/Coins"]
+layout_mode = 2
+theme_override_constants/margin_bottom = 10
+
+[node name="CoinLabel" type="Label" parent="Control/PowerUpButton/Coins/MarginContainer2"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.907897, 0.688939, 0.242307, 1)
+theme_override_fonts/font = ExtResource("2_pr81k")
+theme_override_font_sizes/font_size = 160
+text = "50"
+vertical_alignment = 1
+
+[node name="MarginContainer" type="MarginContainer" parent="Control/PowerUpButton/Coins"]
+layout_mode = 2
+theme_override_constants/margin_top = 20
+theme_override_constants/margin_bottom = 20
+
+[node name="TextureRect" type="TextureRect" parent="Control/PowerUpButton/Coins/MarginContainer"]
+layout_mode = 2
+texture = ExtResource("3_3xvtq")
+expand_mode = 2
+
+[connection signal="pressed" from="Control/PowerUpButton" to="." method="_on_power_up_button_pressed"]
