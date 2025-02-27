@@ -11,6 +11,5 @@ script = ExtResource("1_6s46x")
 scale = Vector2(0.25, 0.25)
 texture = ExtResource("1_06d2r")
 
-[node name="AlertAudio" type="AudioStreamPlayer2D" parent="."]
+[node name="AlertSound" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("2_utgq0")
-autoplay = true
