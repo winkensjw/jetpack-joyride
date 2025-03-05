@@ -1,7 +1,7 @@
 [gd_scene load_steps=13 format=3 uid="uid://bod60lceunai5"]
 
 [ext_resource type="Texture2D" uid="uid://25qmydaxy35y" path="res://resources/sprites/main_menu.jpg" id="1_076i8"]
-[ext_resource type="Script" path="res://scenes/start_screen/start_screen.gd" id="1_t1uvc"]
+[ext_resource type="Script" uid="uid://curfft6oo0a8s" path="res://scenes/start_screen/start_screen.gd" id="1_t1uvc"]
 [ext_resource type="FontFile" uid="uid://b6oytbii1s7h" path="res://resources/fonts/mago3.ttf" id="2_i0epl"]
 [ext_resource type="AudioStream" uid="uid://c8nkjvt3yfxuf" path="res://resources/audio/music/main_theme.wav" id="3_rifvs"]
 [ext_resource type="Texture2D" uid="uid://dl6prb1dp47rw" path="res://resources/sprites/menu_button.png" id="4_61rnk"]
@@ -43,8 +43,8 @@ tracks/0/keys = {
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_0utbm"]
 _data = {
-"RESET": SubResource("Animation_ljl1p"),
-"text_blink": SubResource("Animation_w8ct6")
+&"RESET": SubResource("Animation_ljl1p"),
+&"text_blink": SubResource("Animation_w8ct6")
 }
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_1f6gx"]
@@ -99,7 +99,7 @@ horizontal_alignment = 1
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="Background"]
 libraries = {
-"": SubResource("AnimationLibrary_0utbm")
+&"": SubResource("AnimationLibrary_0utbm")
 }
 autoplay = "text_blink"
 

@@ -1,7 +1,7 @@
 [gd_scene load_steps=8 format=3 uid="uid://dhvaxn0fiv8ly"]
 
 [ext_resource type="Texture2D" uid="uid://r62e38c7mwd0" path="res://resources/sprites/barry-flying-idle.png" id="1_gubm0"]
-[ext_resource type="Script" path="res://scenes/barry/barry.gd" id="1_qm3q5"]
+[ext_resource type="Script" uid="uid://bjebua3oehjoh" path="res://scenes/barry/barry.gd" id="1_qm3q5"]
 [ext_resource type="Texture2D" uid="uid://bnugb888y5you" path="res://resources/sprites/Bullet_Shell.png" id="2_dy014"]
 [ext_resource type="AudioStream" uid="uid://ds7nmy7p0jxuv" path="res://resources/audio/sfx/clean-machine-gun-burst-98224.mp3" id="4_2upli"]
 [ext_resource type="AudioStream" uid="uid://b5rjbakh03dl3" path="res://resources/audio/sfx/laser-shot-ingame-230500.mp3" id="5_5h6ot"]
@@ -36,9 +36,9 @@ position = Vector2(71, -4)
 position = Vector2(-50, 24)
 emitting = false
 amount = 40
-process_material = SubResource("ParticleProcessMaterial_jmmsx")
 texture = ExtResource("2_dy014")
 lifetime = 5.0
+process_material = SubResource("ParticleProcessMaterial_jmmsx")
 
 [node name="BarrySprite" type="Sprite2D" parent="."]
 scale = Vector2(0.25, 0.25)

@@ -1,7 +1,7 @@
 [gd_scene load_steps=8 format=3 uid="uid://dc3rmgc8kijcx"]
 
 [ext_resource type="FontFile" uid="uid://b6oytbii1s7h" path="res://resources/fonts/mago3.ttf" id="1_1yqph"]
-[ext_resource type="Script" path="res://scenes/main_menu/settings_dialog/settings_dialog.gd" id="1_8n6tt"]
+[ext_resource type="Script" uid="uid://yval5iugbsny" path="res://scenes/main_menu/settings_dialog/settings_dialog.gd" id="1_8n6tt"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_8qxam"]
 bg_color = Color(0.435294, 0.52549, 0.643137, 1)

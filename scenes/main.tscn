@@ -1,6 +1,6 @@
 [gd_scene load_steps=3 format=3 uid="uid://da2rlyo0r7m2g"]
 
-[ext_resource type="Script" path="res://scenes/main.gd" id="1_67x63"]
+[ext_resource type="Script" uid="uid://be3hqqnvmuj2q" path="res://scenes/main.gd" id="1_67x63"]
 [ext_resource type="AudioStream" uid="uid://c8nkjvt3yfxuf" path="res://resources/audio/music/main_theme.wav" id="2_cqgb8"]
 
 [node name="Main" type="Node2D"]

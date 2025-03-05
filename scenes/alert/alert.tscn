@@ -1,7 +1,7 @@
 [gd_scene load_steps=4 format=3 uid="uid://b0j87hbvdhyra"]
 
 [ext_resource type="Texture2D" uid="uid://b7uqoa1e8o8ah" path="res://resources/sprites/Achtung.png" id="1_06d2r"]
-[ext_resource type="Script" path="res://scenes/alert/alert.gd" id="1_6s46x"]
+[ext_resource type="Script" uid="uid://b6ll1b1qhujma" path="res://scenes/alert/alert.gd" id="1_6s46x"]
 [ext_resource type="AudioStream" uid="uid://g6ay78yfftdc" path="res://resources/audio/sfx/beep-warning-6387.mp3" id="2_utgq0"]
 
 [node name="Alert" type="Node2D"]

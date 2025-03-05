@@ -1,7 +1,7 @@
 [gd_scene load_steps=5 format=3 uid="uid://4kksv41hmxag"]
 
 [ext_resource type="Texture2D" uid="uid://cou3jv10r4xp" path="res://resources/sprites/Speed.png" id="1_ebct8"]
-[ext_resource type="Script" path="res://scenes/power_up_scene/power_up_scene.gd" id="1_yfxad"]
+[ext_resource type="Script" uid="uid://c5hsh2lr2rk72" path="res://scenes/power_up_scene/power_up_scene.gd" id="1_yfxad"]
 [ext_resource type="FontFile" uid="uid://b6oytbii1s7h" path="res://resources/fonts/mago3.ttf" id="2_pr81k"]
 [ext_resource type="Texture2D" uid="uid://bta3q36pm4m1q" path="res://resources/sprites/Münze.png" id="3_3xvtq"]
 

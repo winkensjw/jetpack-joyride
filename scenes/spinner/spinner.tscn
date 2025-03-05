@@ -1,7 +1,7 @@
 [gd_scene load_steps=4 format=3 uid="uid://ibs8srk8nk7p"]
 
 [ext_resource type="Texture2D" uid="uid://j7mjt7pi4jxg" path="res://resources/sprites/Spinner.png" id="1_4pnhi"]
-[ext_resource type="Script" path="res://scenes/spinner/spinner.gd" id="1_qnq0w"]
+[ext_resource type="Script" uid="uid://c83a6j7cf26cd" path="res://scenes/spinner/spinner.gd" id="1_qnq0w"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_sysq2"]
 size = Vector2(62, 245)
